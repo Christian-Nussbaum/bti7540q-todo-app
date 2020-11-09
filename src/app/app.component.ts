@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Todo } from './model/todo';
+import { TodoItemRepositoryService } from './services/todo-item-repository.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ToDo-App';
+
+  public constructor(
+    private readonly todoItemRepository:TodoItemRepositoryService
+  ) { 
+    this.todoItemRepository.generateFakeTodos();
+  }
+
+  public get items(): Array<Todo> {
+    return this.todoItemRepository.getTodos();
+  }
+
 }
