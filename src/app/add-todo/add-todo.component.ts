@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Todo } from '../model/todo';
+import { TodoItemRepositoryService } from '../services/todo-item-repository.service';
 
 @Component({
   selector: 'app-add-todo',
@@ -10,7 +13,9 @@ export class AddTodoComponent implements OnInit {
   addTodoForm:FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private readonly todoItemRepository: TodoItemRepositoryService,
+    private router: Router
   ) {
     this.addTodoForm = this.formBuilder.group({
     title: '',
@@ -23,9 +28,13 @@ export class AddTodoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  onSubmit(data: any) {
     this.addTodoForm.reset();
-    console.warn('added todo');
+    console.log(data);
+
+    const todo = new Todo(5, data.title, data.category, data.dueDate, data.important);
+    this.todoItemRepository.addTodo(todo);
+    this.router.navigateByUrl('/');
   }
 
 }

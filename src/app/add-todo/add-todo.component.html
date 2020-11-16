@@ -1,21 +1,35 @@
 <h3>Add To Do</h3>
 
-<form [formGroup]="addTodoForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="addTodoForm" (ngSubmit)="onSubmit(addTodoForm.value)">
 
     <div>
-      <label for="name">
-        Name
+      <label for="title">
+        Title: 
       </label>
-      <input id="name" type="text" formControlName="name">
+      <input id="title" type="text" formControlName="title">
     </div>
   
     <div>
-      <label for="address">
-        Address
+      <label for="category">
+        Category: 
       </label>
-      <input id="address" type="text" formControlName="address">
+      <input id="category" type="text" formControlName="category">
+    </div>
+
+    <div>
+      <label for="dueDate">
+        Due Date: 
+      </label>
+      <input id="dueDate" type="date" formControlName="dueDate">
+    </div>
+
+    <div>
+      <label for="important">
+        Important? 
+      </label>
+      <input id="important" type="checkbox" formControlName="important">
     </div>
   
-    <button class="button" type="submit">Purchase</button>
+    <button class="button" type="submit">Add Todo</button>
   
   </form>
