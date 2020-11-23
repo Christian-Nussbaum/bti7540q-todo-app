@@ -1,0 +1,37 @@
+<div [ngClass]="{ 'completed': item.completed }">
+  <span class="icon">
+    <svg class="bi clickable" width="20" height="20" *ngIf="!item.completed" (click)="markCompleted(true)">
+      <use xlink:href="bootstrap-icons.svg#square"/>
+    </svg>
+    <svg class="bi clickable" width="20" height="20" color="#44e374"*ngIf="item.completed" (click)="markCompleted(false)">
+      <use xlink:href="bootstrap-icons.svg#check-square"/>
+    </svg>
+  </span>
+
+  <span class="icon">
+    <svg class="bi clickable" width="20" height="20" *ngIf="!item.important" (click)="markImportant(true)">
+      <use xlink:href="bootstrap-icons.svg#star"/>
+    </svg>
+    <svg class="bi clickable" width="20" height="20" color="#ffe438"*ngIf="item.important" (click)="markImportant(false)">
+      <use xlink:href="bootstrap-icons.svg#star-fill"/>
+    </svg>
+  </span>
+
+  <a class="icon" [routerLink]="'/edit-todo/' + item.id">
+    <svg class="bi clickable" width="20" height="20">
+      <use xlink:href="bootstrap-icons.svg#pencil"/>
+    </svg>
+  </a>
+
+  <span class="text">
+    {{item.dueDate | date:'dd.MM.yyyy HH:mm' }}
+  </span>
+
+  <br />
+
+  <span class="text">
+    {{item.title}} - {{item.category}}
+  </span>
+
+</div>
+

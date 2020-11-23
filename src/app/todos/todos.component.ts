@@ -10,9 +10,8 @@ import { TodoItemRepositoryService } from '../services/todo-item-repository.serv
 export class TodosComponent implements OnInit {
 
   public constructor(
-    private readonly todoItemRepository:TodoItemRepositoryService
-  ) { 
-    
+    private readonly todoItemRepository: TodoItemRepositoryService
+  ) {
   }
 
   public get items(): Array<Todo> {

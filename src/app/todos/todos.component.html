@@ -1,13 +1,9 @@
-<div *ngFor='let item of items'>
-    <p>ID: {{ item.id }}</p>
-    <p>Todo: {{ item.title }}</p>
-</div>
+<h1>Todos</h1>
 
-<div>
-    <nav>
-        <ul>
-          <li><a [routerLink]="'/add-todo'">Add Todo</a></li>
-          <li><a [routerLink]="'/edit-todo'">Edit Todo</a></li>
-        </ul>
-    </nav>
+<a [routerLink]="'/add-todo'" class="btn btn-link">Add new Todo</a>
+
+<div class="card" style="border: none;">
+  <ul class="list-group list-group-flush" >
+    <app-todo *ngFor='let item of items' [item]=item class="list-group-item"></app-todo>
+  </ul>
 </div>

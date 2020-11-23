@@ -7,11 +7,10 @@ import { TodoItemRepositoryService } from './services/todo-item-repository.servi
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ToDo-App';
 
   public constructor(
-    private readonly todoItemRepository:TodoItemRepositoryService
-  ) { 
+    private readonly todoItemRepository: TodoItemRepositoryService
+  ) {
     this.todoItemRepository.generateFakeTodos();
   }
 }

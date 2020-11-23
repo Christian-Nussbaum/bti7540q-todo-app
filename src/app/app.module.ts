@@ -9,13 +9,17 @@ import { EditTodoComponent } from './edit-todo/edit-todo.component';
 import { TodosComponent } from './todos/todos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { TodoComponent } from './todo/todo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTodoComponent,
     EditTodoComponent,
-    TodosComponent
+    TodosComponent,
+    LoginComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,

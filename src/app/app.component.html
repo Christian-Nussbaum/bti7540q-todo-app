@@ -1,3 +1,29 @@
-<h1>{{title}}</h1>
+<nav class="navbar navbar-dark navbar-expand bg-primary sticky-top px-5">
+  <a class="navbar-brand" href="#">ToDo</a>
 
-<router-outlet></router-outlet>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link my-2 my-sm-0" href="/login">Login</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+
+</nav>
+
+
+<div class="container-fluid px-5 py-3">
+  <router-outlet></router-outlet>
+</div>
+
+
+<footer class="navbar navbar-dark bg-dark fixed-bottom">
+  <span class="navbar-text m-auto">&copy; 2020 - Christian Nussbaum &amp; Luca Berger</span>
+</footer>
+
+
