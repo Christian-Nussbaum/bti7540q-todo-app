@@ -21,7 +21,7 @@ export class EditTodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const id = params.id;
+      const id = Number(params.id);
       this.todoItem = this.todoItemRepository.getTodoById(id);
     });
   }
