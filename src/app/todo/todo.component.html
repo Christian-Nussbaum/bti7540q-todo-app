@@ -17,7 +17,7 @@
     </svg>
   </span>
 
-  <a class="icon" [routerLink]="'/edit-todo/' + item.id">
+  <a class="icon" [routerLink]="['/edit-todo', item.id]">
     <svg class="bi clickable" width="20" height="20">
       <use xlink:href="bootstrap-icons.svg#pencil"/>
     </svg>

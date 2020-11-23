@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'todos', component: TodosComponent },
   { path: 'login', component: LoginComponent },
   { path: 'add-todo', component: AddTodoComponent },
-  { path: 'edit-todo', component: EditTodoComponent },
+  { path: 'edit-todo/:id', component: EditTodoComponent },
   { path: '**', component: TodosComponent },
 ];
 

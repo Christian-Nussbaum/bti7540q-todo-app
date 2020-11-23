@@ -15,6 +15,11 @@ export class TodoItemRepositoryService {
     this.items.push(itemToAdd);
   }
 
+  public getTodoById(id: number): Todo|undefined {
+    return this.items
+      .find(todo => todo.id == id);
+  }
+
   public removeTodo(itemToRemove: Todo): void {
     this.items = this.items
       .filter(todo => todo.id !== itemToRemove.id);

@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loading = false;
-  onceSubmited = false;
+  onceSubmitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    this.onceSubmited = true;
+    this.onceSubmitted = true;
 
     if (this.loginForm.invalid) {
       return;

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {TodoItemRepositoryService} from '../services/todo-item-repository.service';
+import {Todo} from '../model/todo';
 
 @Component({
   selector: 'app-edit-todo',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTodoComponent implements OnInit {
 
-  constructor() { }
+  todoItem: Todo;
+  
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly todoItemRepository: TodoItemRepositoryService
+  ) {
+
+  }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const id = params.id;
+      this.todoItem = this.todoItemRepository.getTodoById(id);
+    });
   }
 
 }
