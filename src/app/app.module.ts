@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { TodoComponent } from './todo/todo.component';
+import { AuthenticationService } from './services/authentication.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,10 +28,12 @@ import { TodoComponent } from './todo/todo.component';
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
-    TodoItemRepositoryService
+    TodoItemRepositoryService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

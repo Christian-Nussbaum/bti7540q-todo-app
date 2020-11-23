@@ -2,6 +2,8 @@
 
 <form [formGroup]="loginForm" (ngSubmit)="login()">
 
+
+
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" formControlName="username" class="form-control" id="username" [ngClass]="{ 'is-invalid': onceSubmitted && loginForm.controls.username.errors }">
@@ -16,6 +18,10 @@
     <div *ngIf="loginForm.controls.password.errors" class="invalid-feedback">
       <div *ngIf="loginForm.controls.password.errors.required">Password is required</div>
     </div>
+  </div>
+
+  <div *ngIf="loginFailed" class="text-danger">
+    Login failed! Credentials are invalid
   </div>
 
   <div class="form-group">
