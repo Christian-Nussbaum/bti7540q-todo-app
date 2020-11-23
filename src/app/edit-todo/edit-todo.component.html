@@ -3,3 +3,37 @@
 <div *ngIf="todoItem">
   #{{todoItem.id}}
 </div>
+
+<form [formGroup]="editTodoForm" (ngSubmit)="onSubmit(editTodoForm.value)">
+
+    <div>
+      <label for="title">
+        Title: 
+      </label>
+      <input id="title" type="text" formControlName="title">
+    </div>
+  
+    <div>
+      <label for="category">
+        Category: 
+      </label>
+      <input id="category" type="text" formControlName="category">
+    </div>
+
+    <div>
+      <label for="dueDate">
+        Due Date: 
+      </label>
+      <input id="dueDate" type="date" formControlName="dueDate">
+    </div>
+
+    <div>
+      <label for="important">
+        Important? 
+      </label>
+      <input id="important" type="checkbox" formControlName="important">
+    </div>
+  
+    <button class="button" type="submit">Save Changes</button>
+  
+  </form>
