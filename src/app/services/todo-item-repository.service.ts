@@ -17,7 +17,7 @@ export class TodoItemRepositoryService {
 
   public getTodoById(id: number): Todo|undefined {
     return this.items
-      .find(todo => todo.id == id);
+      .find(todo => todo.id === id);
   }
 
   public removeTodo(itemToRemove: Todo): void {
