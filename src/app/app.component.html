@@ -8,7 +8,8 @@
     <form class="form-inline my-2 my-lg-0">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link my-2 my-sm-0" href="/login">Login</a>
+          <a class="nav-link my-2 my-sm-0" routerLink="/login" *ngIf="!isAuthenticated">Login</a>
+          <button class="btn btn-default" (click)="logout()" *ngIf="isAuthenticated">Logout</button>
         </li>
       </ul>
     </form>
