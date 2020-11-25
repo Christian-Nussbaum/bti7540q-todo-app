@@ -32,6 +32,17 @@ export class AuthenticationService {
       }));
   }
 
+  public register(username: string, password: string): Observable<boolean> {
+    return this.http.post(`${environment.restApi}/users`, {
+      name: username,
+      password
+    })
+    .pipe(map(() => {
+      return true;
+    }));
+  }
+
+
   public logout(): void {
     this.token = '';
   }

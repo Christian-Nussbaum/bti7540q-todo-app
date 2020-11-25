@@ -2,8 +2,6 @@
 
 <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-
-
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" formControlName="username" class="form-control" id="username" [ngClass]="{ 'is-invalid': onceSubmitted && loginForm.controls.username.errors }">
@@ -31,7 +29,7 @@
       Login
     </button>
 
-    <a routerLink="/register" class="btn btn-link">Register</a>
+    <a [routerLink]="'/register'" class="btn btn-link">Register</a>
 
   </div>
 

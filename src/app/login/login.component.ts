@@ -11,7 +11,7 @@ import {AuthenticationService} from '../services/authentication.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  loading = false;
+  isLoading = false;
   onceSubmitted = false;
   loginFailed = false;
 
@@ -36,15 +36,17 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.isLoading = true;
 
-    // TODO: Login
     const username = this.loginForm.controls.username.value;
     const password = this.loginForm.controls.password.value;
     this.authenticationService.login(username, password).subscribe(() => {
+      console.log('Successfully logged in');
+      this.isLoading = false;
       this.router.navigate(['/todos']);
     }, err => {
       console.log('LOGIN FAILED:', err);
+      this.isLoading = false;
       this.loginFailed = true;
     });
 

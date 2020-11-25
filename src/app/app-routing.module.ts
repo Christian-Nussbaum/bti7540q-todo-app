@@ -4,13 +4,17 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
 import { EditTodoComponent } from './edit-todo/edit-todo.component';
 import { TodosComponent } from './todos/todos.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './utils/routing/auth.guard';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: 'todos', component: TodosComponent },
+  { path: '', component: TodosComponent, canActivate: [AuthGuard] },
+  { path: 'todos', component: TodosComponent, canActivate: [AuthGuard]  },
+  { path: 'add-todo', component: AddTodoComponent, canActivate: [AuthGuard]  },
+  { path: 'edit-todo/:id', component: EditTodoComponent, canActivate: [AuthGuard]  },
   { path: 'login', component: LoginComponent },
-  { path: 'add-todo', component: AddTodoComponent },
-  { path: 'edit-todo/:id', component: EditTodoComponent },
-  { path: '**', component: TodosComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: ''},
 ];
 
 @NgModule({

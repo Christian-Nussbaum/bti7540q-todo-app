@@ -13,14 +13,13 @@ export class EditTodoComponent implements OnInit {
 
   todoItem: Todo;
   editTodoForm: FormGroup;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly todoItemRepository: TodoItemRepositoryService
   ) {
-    
   }
 
   ngOnInit(): void {
@@ -37,7 +36,7 @@ export class EditTodoComponent implements OnInit {
       });
   }
 
-  onSubmit(data: any) {
+  onSubmit(data: any): void {
     this.editTodoForm.reset();
     console.log(data);
 

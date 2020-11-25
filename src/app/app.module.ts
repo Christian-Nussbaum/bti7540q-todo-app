@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { TodoComponent } from './todo/todo.component';
 import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
+import {AuthGuard} from './utils/routing/auth.guard';
+import {RegisterComponent} from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     EditTodoComponent,
     TodosComponent,
     LoginComponent,
+    RegisterComponent,
     TodoComponent
   ],
   imports: [
@@ -33,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     TodoItemRepositoryService,
-    AuthenticationService
+    AuthenticationService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
