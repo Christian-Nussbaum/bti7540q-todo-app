@@ -28,6 +28,24 @@ export class TodoService {
       );
   }
 
+  public createTodo(todoItem: Todo): Observable<boolean> {
+    const model = {
+      title: todoItem.title,
+      category: todoItem.category,
+      dueDate: todoItem.dueDate,
+      important: todoItem.important,
+      completed: todoItem.completed
+    };
+    return this.http.post<Todo>(`${environment.restApi}/todos`, model)
+      .pipe(
+        map(todo => {
+          console.info('Successfully created todo item');
+          this.todoItemRepository.addTodo(todo);
+          return true;
+        })
+      );
+  }
+
   public updateTodo(todoItem: Todo): Observable<boolean> {
     return this.http.put(`${environment.restApi}/todos/${todoItem.id}`, todoItem)
     .pipe(
