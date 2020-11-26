@@ -10,7 +10,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class EditTodoComponent implements OnInit {
 
+  // @ts-ignore
   todoItem: Todo;
+  // @ts-ignore
   editTodoForm: FormGroup;
 
   constructor(
