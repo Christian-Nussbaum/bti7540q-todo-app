@@ -20,8 +20,11 @@ export class TodoService {
       .pipe(
         map(todos => {
           console.info(`Successfully got all ${todos.length} todos`);
-          for (const todo of todos) {
-            this.todoItemRepository.addTodo(todo);
+          if (todos.length > 0) {
+            this.todoItemRepository.clear();
+            for (const todo of todos) {
+              this.todoItemRepository.addTodo(todo);
+            }
           }
           return true;
         })

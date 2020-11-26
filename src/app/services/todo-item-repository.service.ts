@@ -11,6 +11,10 @@ export class TodoItemRepositoryService {
     return this.items;
   }
 
+  public clear(): void {
+    this.items.length = 0;
+  }
+
   public addTodo(itemToAdd: Todo): void {
     this.items.push(itemToAdd);
   }
