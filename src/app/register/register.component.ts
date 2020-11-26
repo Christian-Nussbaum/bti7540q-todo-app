@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../services/authentication.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
 
+  // @ts-ignore
   registerForm: FormGroup;
   isLoading = false;
   onceSubmitted = false;
@@ -24,8 +24,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      username: ['test', Validators.required],
-      password: ['45645646', Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 

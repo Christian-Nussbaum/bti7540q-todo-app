@@ -18,8 +18,12 @@ export class AuthenticationService {
     return this.token !== '';
   }
 
+  public getToken(): string {
+    return this.token;
+  }
+
   public login(username: string, password: string): Observable<User> {
-    return this.http.post<User>(`${environment.restApi}/users/login`, undefined, {
+    return this.http.post(`${environment.restApi}/users/login`, undefined, {
       headers: {
         Authorization: this.getAuthHeader(username, password),
       },

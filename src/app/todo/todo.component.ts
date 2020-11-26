@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DatePipe} from '@angular/common';
-import {Todo} from '../model/todo';
+import { Component, Input, OnInit } from '@angular/core';
+import { Todo } from '../model/todo';
+import { TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -10,18 +10,40 @@ import {Todo} from '../model/todo';
 export class TodoComponent implements OnInit {
   @Input() item!: Todo;
 
-  constructor() { }
+  constructor(
+    private readonly todoService: TodoService
+  ) { }
 
   ngOnInit(): void {
   }
 
   public markCompleted(newValue: boolean): void {
     this.item.completed = newValue;
-    // TODO: Send request to server
+    this.handleUpdateRequst('MarkCompleted', this.item, (item) => item.completed = !newValue);
   }
 
   public markImportant(newValue: boolean): void {
     this.item.important = newValue;
-    // TODO: Send request to server
+    this.handleUpdateRequst('MarkImportant', this.item, (item) => item.important = !newValue);
+  }
+
+  public deleteTodo(): void {
+    this.todoService.deleteTodo(this.item)
+      .subscribe(() => {
+        console.info(`Deleting todo item succeeded`);
+      }, error => {
+        console.error('Deleting todo item failed.', error);
+      });
+  }
+
+
+  private handleUpdateRequst(requestName: string, item: Todo, revertAction: (item: Todo) => void): void {
+    this.todoService.updateTodo(this.item)
+      .subscribe(() => {
+        console.info(`Updating todo item (${requestName}) succeeded`);
+      }, error => {
+        revertAction(item);
+        console.error(`Updating todo item (${requestName}) failed.`, error);
+      });
   }
 }

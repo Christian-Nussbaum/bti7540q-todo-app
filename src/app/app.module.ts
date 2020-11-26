@@ -8,13 +8,16 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
 import { EditTodoComponent } from './edit-todo/edit-todo.component';
 import { TodosComponent } from './todos/todos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { TodoComponent } from './todo/todo.component';
 import { AuthenticationService } from './services/authentication.service';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from './utils/routing/auth.guard';
 import {RegisterComponent} from './register/register.component';
+import {TokenInterceptor} from './utils/http/token.interceptor';
+import {Http401ErrorInterceptor} from './utils/http/http-401-error.interceptor';
+import {TodoService} from './services/todo.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,7 @@ import {RegisterComponent} from './register/register.component';
     TodosComponent,
     LoginComponent,
     RegisterComponent,
-    TodoComponent
+    TodoComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,8 +39,11 @@ import {RegisterComponent} from './register/register.component';
   ],
   providers: [
     TodoItemRepositoryService,
+    TodoService,
     AuthenticationService,
-    AuthGuard
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: Http401ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

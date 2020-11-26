@@ -15,7 +15,8 @@ export class TodoItemRepositoryService {
     this.items.push(itemToAdd);
   }
 
-  public getTodoById(id: number): Todo|undefined {
+  public getTodoById(id: number): Todo {
+     // @ts-ignore
     return this.items
       .find(todo => todo.id === id);
   }
@@ -33,14 +34,4 @@ export class TodoItemRepositoryService {
     }
   }
 
-  // TODO: Remove when Todos can be retrieved / saved via API
-  public generateFakeTodos(): void {
-    let important = false;
-    for (let i = 1; i <= 5; i++) {
-      important = !important;
-      const todo = new Todo(i, 'this is a test' + i, 'Test', '2020-11-30', important);
-      todo.completed = important;
-      this.addTodo(todo);
-    }
-  }
 }

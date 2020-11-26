@@ -6,11 +6,10 @@ import { TodoItemRepositoryService } from '../services/todo-item-repository.serv
 
 @Component({
   selector: 'app-add-todo',
-  templateUrl: './add-todo.component.html',
-  styleUrls: ['./add-todo.component.css']
+  templateUrl: './add-todo.component.html'
 })
 export class AddTodoComponent implements OnInit {
-  addTodoForm:FormGroup;
+  addTodoForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -18,17 +17,17 @@ export class AddTodoComponent implements OnInit {
     private router: Router
   ) {
     this.addTodoForm = this.formBuilder.group({
-    title: '',
-    category: '',
-    dueDate: '',
-    important: false
+      title: '',
+      category: '',
+      dueDate: '',
+      important: false
     });
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit(data: any) {
+  onSubmit(data: any): void {
     this.addTodoForm.reset();
     console.log(data);
 

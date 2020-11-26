@@ -6,8 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-todo',
-  templateUrl: './edit-todo.component.html',
-  styleUrls: ['./edit-todo.component.css']
+  templateUrl: './edit-todo.component.html'
 })
 export class EditTodoComponent implements OnInit {
 
