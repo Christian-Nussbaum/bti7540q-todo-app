@@ -1,39 +1,51 @@
-<h1>Edit Todo item</h1>
+<h1>Edit To Do</h1>
 
-<div *ngIf="todoItem">
-  #{{todoItem.id}}
-</div>
+<form [formGroup]="editTodoForm" (ngSubmit)="editTodo()">
 
-<form [formGroup]="editTodoForm" (ngSubmit)="onSubmit(editTodoForm.value)">
-
-    <div>
-      <label for="title">
-        Title: 
-      </label>
-      <input id="title" type="text" formControlName="title">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" formControlName="title" class="form-control" id="title" [ngClass]="{ 'is-invalid': onceSubmitted && editTodoForm.controls.title.errors }">
+    <div *ngIf="editTodoForm.controls.title.errors" class="invalid-feedback">
+      <div *ngIf="editTodoForm.controls.title.errors.required">Title is required</div>
     </div>
-  
-    <div>
-      <label for="category">
-        Category: 
-      </label>
-      <input id="category" type="text" formControlName="category">
-    </div>
+  </div>
 
-    <div>
-      <label for="dueDate">
-        Due Date: 
-      </label>
-      <input id="dueDate" type="date" formControlName="dueDate">
+  <div class="form-group">
+    <label for="category">Category</label>
+    <input type="text" formControlName="category" class="form-control" id="category" [ngClass]="{ 'is-invalid': onceSubmitted && editTodoForm.controls.category.errors }">
+    <div *ngIf="editTodoForm.controls.category.errors" class="invalid-feedback">
+      <div *ngIf="editTodoForm.controls.category.errors.required">Category is required</div>
     </div>
+  </div>
 
-    <div>
-      <label for="important">
-        Important? 
-      </label>
-      <input id="important" type="checkbox" formControlName="important">
+  <div class="form-group">
+    <label for="dueDate">Due date</label>
+    <input type="date" formControlName="dueDate" min="{{ this.getDate() }}" class="form-control" id="dueDate" [ngClass]="{ 'is-invalid': onceSubmitted && editTodoForm.controls.dueDate.errors }">
+    <div *ngIf="editTodoForm.controls.dueDate.errors" class="invalid-feedback">
+      <div *ngIf="editTodoForm.controls.dueDate.errors.required">Due Date is required</div>
     </div>
-  
-    <button class="button" type="submit">Save Changes</button>
+  </div>
+
+  <div class="form-group">
+    <label for="important">Important</label>
+    <input type="checkbox" formControlName="important" class="form-control" id="important" [ngClass]="{ 'is-invalid': onceSubmitted && editTodoForm.controls.important.errors }">
+    <div *ngIf="editTodoForm.controls.important.errors" class="invalid-feedback">
+    </div>
+  </div>
+
+  <div *ngIf="editFailed" class="text-danger">
+    Editing todo failed! Please try again later
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary"
+            [disabled]="isLoading">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+      Edit Todo
+    </button>
+
+    <a [routerLink]="'/todos'" class="btn btn-link">Back</a>
+
+  </div>
   
   </form>

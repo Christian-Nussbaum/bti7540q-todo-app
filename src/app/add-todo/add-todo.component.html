@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <label for="dueDate">Due date</label>
-    <input type="date" formControlName="dueDate" class="form-control" id="dueDate" [ngClass]="{ 'is-invalid': onceSubmitted && addTodoForm.controls.dueDate.errors }">
+    <input type="date" formControlName="dueDate" min="{{ this.getDate() }}" class="form-control" id="dueDate" [ngClass]="{ 'is-invalid': onceSubmitted && addTodoForm.controls.dueDate.errors }">
     <div *ngIf="addTodoForm.controls.dueDate.errors" class="invalid-feedback">
     </div>
   </div>
@@ -41,6 +41,9 @@
       <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
       Add Todo
     </button>
+
+    <a [routerLink]="'/todos'" class="btn btn-link">Back</a>
+
   </div>
   
   </form>

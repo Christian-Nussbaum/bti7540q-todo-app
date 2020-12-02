@@ -27,9 +27,35 @@ export class AddTodoComponent implements OnInit {
     this.addTodoForm = this.formBuilder.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
-      dueDate: ['2020-11-26'],
+      dueDate: [this.getDate()],
       important: [false],
     });
+  }
+
+  getDate(): string {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    var dateString = ''
+    var monthString = ''
+    var todayString = ''
+  
+    if(dd < 10) {
+      dateString = '0'+ dd
+    } else {
+      dateString = dd.toString()
+    }
+  
+    if(mm < 10) {
+      monthString = '0' + mm
+    } else {
+      monthString = mm.toString()
+    }
+  
+    todayString = yyyy + '-' + monthString + '-' + dateString;
+    
+    return todayString    
   }
 
   addTodo(): void {
