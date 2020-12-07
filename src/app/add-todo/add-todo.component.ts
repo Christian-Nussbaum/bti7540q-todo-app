@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Todo } from '../model/todo';
-import {TodoService} from '../services/todo.service';
+import { TodoService } from '../services/todo.service';
+import { DateService } from '../utils/date/date.service';
 
 @Component({
   selector: 'app-add-todo',
@@ -17,9 +18,10 @@ export class AddTodoComponent implements OnInit {
   addFailed = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private readonly formBuilder: FormBuilder,
     private readonly todoService: TodoService,
-    private router: Router
+    private readonly router: Router,
+    private readonly dateService: DateService
   ) {
   }
 
@@ -33,29 +35,7 @@ export class AddTodoComponent implements OnInit {
   }
 
   getDate(): string {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1;
-    var yyyy = today.getFullYear();
-    var dateString = ''
-    var monthString = ''
-    var todayString = ''
-  
-    if(dd < 10) {
-      dateString = '0'+ dd
-    } else {
-      dateString = dd.toString()
-    }
-  
-    if(mm < 10) {
-      monthString = '0' + mm
-    } else {
-      monthString = mm.toString()
-    }
-  
-    todayString = yyyy + '-' + monthString + '-' + dateString;
-    
-    return todayString    
+   return this.dateService.getCurrentDateString();
   }
 
   addTodo(): void {

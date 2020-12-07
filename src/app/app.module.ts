@@ -18,6 +18,7 @@ import {RegisterComponent} from './register/register.component';
 import {TokenInterceptor} from './utils/http/token.interceptor';
 import {Http401ErrorInterceptor} from './utils/http/http-401-error.interceptor';
 import {TodoService} from './services/todo.service';
+import {DateService} from './utils/date/date.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {TodoService} from './services/todo.service';
     TodoItemRepositoryService,
     TodoService,
     AuthenticationService,
+    DateService,
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: Http401ErrorInterceptor, multi: true },
