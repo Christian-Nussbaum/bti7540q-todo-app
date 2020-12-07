@@ -32,6 +32,7 @@ export class ToastComponent implements OnInit, OnDestroy {
       this.toasts = toasts;
 
       // SetTimeout is required, in order to let angular update the UI first.
+      // If jQuery call for this toast comes directly, the toast is not shown, because angular has not yet update the DOM
       setTimeout(() => {
         $('.toast').toast(this.options).toast('show');
       }, 0);
@@ -48,16 +49,16 @@ export class ToastComponent implements OnInit, OnDestroy {
     return ToastCategory[toast.category];
   }
 
-  getColorClass(toast: Toast): string {
+  getColorClass(toast: Toast, prefix = ''): string {
     switch (toast.category) {
       case ToastCategory.Success:
-        return 'bg-success';
+        return prefix + 'success';
       case ToastCategory.Information:
-        return 'bg-info';
+        return prefix + 'info';
       case ToastCategory.Warning:
-        return 'bg-warning';
+        return prefix + 'warning';
       case ToastCategory.Error:
-        return 'bg-danger';
+        return prefix + 'danger';
     }
 
     return '';
