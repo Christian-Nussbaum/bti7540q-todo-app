@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
   loginFailed = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private authenticationService: AuthenticationService
+    private readonly formBuilder: FormBuilder,
+    private readonly router: Router,
+    private readonly authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
