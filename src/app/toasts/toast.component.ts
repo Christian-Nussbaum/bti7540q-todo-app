@@ -12,12 +12,6 @@ declare var $;
 })
 export class ToastComponent implements OnInit, OnDestroy {
 
-  // Note, don't use the autohidde option, since this only hides the toast on the DOM.
-  // It is still rendered.
-  private readonly options = {
-    animation: true,
-    autohide: false
-  };
   private subscription: Subscription | undefined;
 
   constructor(
@@ -30,12 +24,6 @@ export class ToastComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.toastService.toasts$.subscribe(toasts => {
       this.toasts = toasts;
-
-      // SetTimeout is required, in order to let angular update the UI first.
-      // If jQuery call for this toast comes directly, the toast is not shown, because angular has not yet update the DOM
-      setTimeout(() => {
-        $('.toast').toast(this.options).toast('show');
-      }, 0);
     });
   }
 
