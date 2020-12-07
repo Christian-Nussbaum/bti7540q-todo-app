@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../services/authentication.service';
+import {Toast, ToastCategory} from '../model/toast';
+import {ToastService} from '../toasts/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly authenticationService: AuthenticationService
+    private readonly authenticationService: AuthenticationService,
+    private readonly toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -43,11 +46,15 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(username, password).subscribe(() => {
       console.log('Successfully logged in');
       this.isLoading = false;
+      const toast = new Toast(ToastCategory.Success, 'Login was successfull');
+      this.toastService.addToast(toast);
       this.router.navigate(['/todos']);
     }, err => {
       console.log('LOGIN FAILED:', err);
       this.isLoading = false;
       this.loginFailed = true;
+      const toast = new Toast(ToastCategory.Error, 'Login failed. (Invalid credentials)');
+      this.toastService.addToast(toast);
     });
 
   }

@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ToastService} from './toast.service';
 import {Toast, ToastCategory} from '../model/toast';
 import {Subscription} from 'rxjs';
@@ -10,17 +10,17 @@ declare var $;
   selector: 'app-toast',
   templateUrl: './toast.html'
 })
-export class ToastComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class ToastComponent implements OnInit, OnDestroy {
 
+  // Note, don't use the autohidde option, since this only hides the toast on the DOM.
+  // It is still rendered.
   private readonly options = {
     animation: true,
-    autohide: true,
-    delay: 5000
+    autohide: false
   };
   private subscription: Subscription | undefined;
 
   constructor(
-    private readonly zone: NgZone,
     private readonly toastService: ToastService,
   ) {
   }
@@ -30,6 +30,11 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngOnInit(): void {
     this.subscription = this.toastService.toasts$.subscribe(toasts => {
       this.toasts = toasts;
+
+      // SetTimeout is required, in order to let angular update the UI first.
+      setTimeout(() => {
+        $('.toast').toast(this.options).toast('show');
+      }, 0);
     });
   }
 
@@ -39,11 +44,9 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
 
-
-  ngAfterViewChecked(): void {
-    $('.toast').toast(this.options).toast('show');
+  getCategoryString(toast: Toast): string {
+    return ToastCategory[toast.category];
   }
-
 
   getColorClass(toast: Toast): string {
     switch (toast.category) {
@@ -63,6 +66,4 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewChecked {
   closeToast(toast: Toast): void {
     this.toastService.removeToast(toast);
   }
-
-
 }

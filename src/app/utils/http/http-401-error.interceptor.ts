@@ -21,13 +21,12 @@ export class Http401ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     return next.handle(request).pipe(
       catchError(error => {
-        if (error.status === 401) {
+        if (error.status === 401 && this.authenticationService.isAuthenticated()) {
           console.info('Token expired. User will be redirected to login page.');
           // Verify token gets destroyed
           this.authenticationService.logout();
 
           this.router.navigate(['login']);
-          const customError = 'Token expired. User will be redirected to login page.';
           return error;
         }
 
