@@ -44,16 +44,14 @@ export class LoginComponent implements OnInit {
     const username = this.loginForm.controls.username.value;
     const password = this.loginForm.controls.password.value;
     this.authenticationService.login(username, password).subscribe(() => {
-      console.log('Successfully logged in');
       this.isLoading = false;
       const toast = new Toast(ToastCategory.Success, 'Login was successfull');
       this.toastService.addToast(toast);
       this.router.navigate(['/todos']);
     }, err => {
-      console.log('LOGIN FAILED:', err);
       this.isLoading = false;
       this.loginFailed = true;
-      const toast = new Toast(ToastCategory.Error, 'Login failed. (Invalid credentials)');
+      const toast = new Toast(ToastCategory.Error, 'Login request failed.');
       this.toastService.addToast(toast);
     });
 
