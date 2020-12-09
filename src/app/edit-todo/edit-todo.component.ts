@@ -5,6 +5,8 @@ import {Todo} from '../model/todo';
 import {TodoService} from '../services/todo.service';
 import {TodoItemRepositoryService} from '../services/todo-item-repository.service'
 import {DateService} from '../utils/date/date.service';
+import { Toast, ToastCategory } from '../model/toast';
+import { ToastService } from '../toasts/toast.service';
 
 
 @Component({
@@ -19,7 +21,6 @@ export class EditTodoComponent implements OnInit {
   editTodoForm: FormGroup;
   isLoading = false;
   onceSubmitted = false;
-  editFailed = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +28,8 @@ export class EditTodoComponent implements OnInit {
     private readonly router: Router,
     private readonly todoService: TodoService,
     private readonly todoItemRepositoryService: TodoItemRepositoryService,
-    private readonly dateService: DateService
+    private readonly dateService: DateService,
+    private readonly toastService: ToastService
   ) {
   }
 
@@ -51,7 +53,6 @@ export class EditTodoComponent implements OnInit {
 
   editTodo(): void {
     this.onceSubmitted = true;
-    this.editFailed = false;
 
     if (this.editTodoForm.invalid) {
       return;
@@ -66,13 +67,18 @@ export class EditTodoComponent implements OnInit {
 
     const todo = new Todo(this.todoItem.id, title, category, dueDate, important);
     this.todoService.updateTodo(todo).subscribe(() => {
-      console.log('Successfully updated todo');
+      let msg: string = 'Successfully updated todo';
+      console.log(msg);
       this.isLoading = false;
       this.router.navigate(['/todos']);
+      const toast = new Toast(ToastCategory.Success, msg);
+      this.toastService.addToast(toast);
     }, err => {
-      console.log('UPDATE TODO FAILED:', err);
+      let msg: string = 'UPDATE TODO FAILED:';
+      console.log(msg, err);
       this.isLoading = false;
-      this.editFailed = true;
+      const toast = new Toast(ToastCategory.Error, msg);
+      this.toastService.addToast(toast);
     });
   }
 }

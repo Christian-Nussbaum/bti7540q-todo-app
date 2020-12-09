@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
   onceSubmitted = false;
-  loginFailed = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -33,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     this.onceSubmitted = true;
-    this.loginFailed = false;
 
     if (this.loginForm.invalid) {
       return;
@@ -45,12 +43,11 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.controls.password.value;
     this.authenticationService.login(username, password).subscribe(() => {
       this.isLoading = false;
+      this.router.navigate(['/todos']);
       const toast = new Toast(ToastCategory.Success, 'Login was successfull');
       this.toastService.addToast(toast);
-      this.router.navigate(['/todos']);
     }, err => {
       this.isLoading = false;
-      this.loginFailed = true;
       const toast = new Toast(ToastCategory.Error, 'Login request failed.');
       this.toastService.addToast(toast);
     });

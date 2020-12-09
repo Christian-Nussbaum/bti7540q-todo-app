@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Toast, ToastCategory } from '../model/toast';
 import { Todo } from '../model/todo';
 import { TodoService } from '../services/todo.service';
+import { ToastService } from '../toasts/toast.service';
 import { DateService } from '../utils/date/date.service';
 
 @Component({
@@ -15,13 +17,13 @@ export class AddTodoComponent implements OnInit {
   addTodoForm: FormGroup;
   isLoading = false;
   onceSubmitted = false;
-  addFailed = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly todoService: TodoService,
     private readonly router: Router,
-    private readonly dateService: DateService
+    private readonly dateService: DateService,
+    private readonly toastService: ToastService
   ) {
   }
 
@@ -40,7 +42,6 @@ export class AddTodoComponent implements OnInit {
 
   addTodo(): void {
     this.onceSubmitted = true;
-    this.addFailed = false;
 
     if (this.addTodoForm.invalid) {
       return;
@@ -55,13 +56,18 @@ export class AddTodoComponent implements OnInit {
 
     const todo = new Todo(-1, title, category, dueDate, important);
     this.todoService.createTodo(todo).subscribe(() => {
-      console.log('Successfully created todo');
+      let msg: string = 'Successfully created todo';
+      console.log(msg);
       this.isLoading = false;
       this.router.navigate(['/todos']);
+      const toast = new Toast(ToastCategory.Success, msg);
+      this.toastService.addToast(toast);
     }, err => {
-      console.log('CREATE TODO FAILED:', err);
+      let msg: string = 'CREATE TODO FAILED:';
+      console.log(msg, err);
       this.isLoading = false;
-      this.addFailed = true;
+      const toast = new Toast(ToastCategory.Error, msg);
+      this.toastService.addToast(toast);
     });
   }
 
