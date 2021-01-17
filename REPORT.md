@@ -17,3 +17,11 @@ Der grösste Unterschied zu der im Unterricht erstellten “händischen” SPA l
 Ein weiterer Unterschied ist das Arbeiten mit Observables an Stelle von Promises. Von der Grundidee sind sie gleich, jedoch haben Observables den Vorteil, dass sie “lazy” sind.
 Die Observables haben wir hauptsächlich in den HTTP-Requests gebraucht. Bei diesen wird vom Framework eine Möglichkeit bereitgestellt, sogenannte “HttpInterceptors” zu programmieren. Diese können einen Request abfangen und bevor dieser empfangen oder gesendet wird, können noch zusätzliche Operationen gemacht werden wie beispielsweise beim Senden den Autorisierungstoken hinzufügen.  
 Generell empfand ich Angular ein cooles Framework.
+
+
+## Fazit
+Vom Aufbau her sind die beiden Projekte einander ziemlich ähnlich. 
+Wobei durch das Angular Framework einige Dinge vereinfacht werden, resp. einem schon mehr zur Verfügung stellt.  
+Für kleinere Applikationen wie dieses Projekt, lohnt sich jedoch ein JS Framework noch nicht wirklich, weil durch das Framework viele zusätzliche Funtkionen dazukommen, welche nicht benutzt werden.  
+Durch die Verwendung eines Frameworks zwingt man sich einen gewissen vorgegebenen Rahmen auf, hingegen ist man ohne Framework komplett frei, was allerdings auch zu einem "Wildwuchs" führen kann.  
+Generell hatten wir bei der Verwendung von Angular Spass und würden es auch weiter verwenden.
